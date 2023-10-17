@@ -22,15 +22,8 @@ class UserController extends Controller
     public function index()
     {
         $datauser = User::get();
-        return view('User.index', compact('datauser'));
+        return view('Admin.User.index', compact('datauser'));
     }
-    // public function index(Request $request) //membuat json untuk datatable serverside
-    // {
-    //     if ($request->ajax()) {
-    //         return DataTables::of(User::query())->toJson();
-    //     }
-    //     return view('User.index');
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('User.add');
+        return view('Admin.User.add');
     }
 
     /**
@@ -81,7 +74,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $datauser = User::find($id);
-        return view('User.edit', ['user' => $datauser]);
+        return view('Admin.User.edit', ['user' => $datauser]);
     }
 
     /**
