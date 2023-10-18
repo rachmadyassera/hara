@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Opd;
 use App\Models\User;
+use App\Models\Profil;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,7 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $datauser = User::get();
+        $datauser = User::with('opd')->latest()->whereNot('name','developer')->get();
         return view('Admin.User.index', compact('datauser'));
     }
 
@@ -32,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Admin.User.add');
+        $opd = Opd::latest()->get()->where('status','enable');
+        return view('Admin.User.add', compact('opd'));
     }
 
     /**
@@ -43,15 +47,36 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => bcrypt('1234')
-        ]);
-        Alert::success('Success', 'You\'ve Successfully Registered');
-        return redirect()->route('user.index');
 
+        $check_email = User::where('email',$request->email)->first();
+        // dd($request->opd);
+        if (empty($check_email)){
+
+            $newData = new User();
+            $newData ->id = Str::uuid();
+            $newData ->name =  $request->name;
+            $newData ->email = $request->email;
+            $newData ->role = $request->role;
+            $newData ->password = bcrypt('1234');
+            $newData ->save();
+
+            Profil::create([
+                'id' => Str::uuid(),
+                'user_id' => $newData->id,
+                'opd_id' => $request->opd,
+                'nip' => $request->nip,
+                'jabatan' => $request->jabatan,
+                'nohp' => $request->nohp
+            ]);
+
+            Alert::success('Berhasil', 'Akun pengguna berhasil didaftarkan');
+            return back();
+
+
+        }else{
+            Alert::warning('Oops', 'Emailnya sudah terdaftar, silahkan gunakan email yang lain.');
+            return back();
+        }
     }
 
     /**
@@ -73,8 +98,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $datauser = User::find($id);
-        return view('Admin.User.edit', ['user' => $datauser]);
+        $user = User::find($id);
+        $opd = Opd::latest()->get()->where('status','enable');
+
+        return view('Admin.User.edit', compact('opd','user'));
     }
 
     /**
@@ -90,9 +117,15 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = $request->role;
+        $user->status = $request->status;
         $user->save();
 
-        return redirect()->route('user.index');
+        $profil = Profil::find($request->idprofil);
+        $profil->opd_id = $request->opd;
+        $profil->save();
+
+        Alert::success('Berhasil', 'Akun pengguna berhasil diperbaharui');
+        return back();
     }
 
     /**
@@ -108,5 +141,18 @@ class UserController extends Controller
 
         Alert::success('Success', 'You\'ve Successfully Deleted');
         return redirect()->route('user.index');
+    }
+
+    // =================== other function =================================
+
+    public function reset_pass($id)
+    {
+        $user = User::find($id);
+        $user->password = bcrypt('1234');
+        $user->save();
+
+        Alert::success('Berhasil', 'Password pengguna telah direset !');
+        return back();
+
     }
 }

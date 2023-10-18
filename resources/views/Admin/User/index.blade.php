@@ -3,10 +3,10 @@
 <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Data User</h4>
+                <h4 class="card-title">Data pengguna aplikasi</h4>
                 <div class="card-header-action">
                     <div class="buttons">
-                        <a href="{{route ('user.create')}}"  class="btn btn-icon btn-info"><i class="fas fa-plus-circle"></i> Add User</a>
+                        <a href="{{route ('user.create')}}"  class="btn btn-icon btn-info"><i class="fas fa-plus-circle"></i> Pengguna</a>
                     </div>
                 </div>
             </div>
@@ -19,6 +19,8 @@
                                 <td>Nama</td>
                                 <td>Role</td>
                                 <td>Email</td>
+                                <td>Status</td>
+                                <td>Data Profil</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -26,18 +28,27 @@
 
                             @foreach ($datauser as $user )
                             <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->role}}</td>
-                                <td>{{$user->email}}</td>
+                                <td style="vertical-align: middle; ">{{$user->name}}</td>
+                                <td style="vertical-align: middle; ">{{$user->role}}</td>
+                                <td style="vertical-align: middle; ">{{$user->email}}</td>
+                                <td style="vertical-align: middle; ">
+                                    @if ($user->status =='enable')
+                                    <div class="badge badge-success">Enable</div>
+                                    @else
+                                    <div class="badge badge-danger">Disable</div>
+                                    @endif
+                                </td>
+                                <td style="vertical-align: middle; ">
+                                    NIP : {{$user->profil->nip}}<br>
+                                    Jabatan : {{$user->profil->jabatan}}<br>
+                                    Instansi : {{$user->profil->opd->nama}}<br>
+                                    No HP : {{$user->profil->nohp}}
+                                </td>
                                 <td>
                                     <ul class="nav">
-                                        <a href="{{route ('user.edit', $user->id)}}" class="btn btn-primary mr-2">Edit</a>
-                                        {{-- <a onclick="confirmation(event)" class="btn btn-warning" href="{{route ('user.destroy', $user->id)}}" ><i class="fas fa-trash"></i> Hapus</a> --}}
-                                        <form action="{{route ('user.destroy', $user->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-warning">Delete</button>
-                                        </form>
+                                        <a href="{{route ('user.edit', $user->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>&nbsp;
+                                        <a href="{{route ('user.destroy', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>&nbsp;
+                                        <a href="{{route ('user.reset-pass', $user->id)}}" class="btn-sm btn-success" onclick="confirmation(event)"><i class="fa fa-recycle"></i></a>&nbsp;
                                     </ul>
                                 </td>
                             </tr>

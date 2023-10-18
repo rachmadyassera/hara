@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Update User</h4>
+                <h4 class="card-title">Pembaharuan data pengguna aplikasi</h4>
                 <div class="card-header-action">
                     <div class="buttons">
                     </div>
@@ -13,6 +13,7 @@
                 <form action="{{route('user.update', $user->id)}}" method="POST">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="idprofil" class="form-control" required value="{{$user->profil->id}}">
                     <div class="form-group">
                         <label>Nama </label>
                         <input type="text" name="name" class="form-control" required value="{{$user->name}}">
@@ -26,14 +27,41 @@
                         <select class="form-control" name="role" required>
                             @if ($user->role =='admin')
                             <option value = "admin" selected> Admin </option>
-                            <option value = "member"> Member </option>
+                            <option value = "operator"> Operator </option>
                             @else
                             <option value = "admin"> Admin </option>
-                            <option value = "member" selected> Member </option>
+                            <option value = "operator" selected> Operator </option>
                             @endif
                         </select>
                     </div>
-                    <input type="submit" value="Simpan Data" class="btn btn-success">
+                    <div class="form-group">
+                        <label>Organisasi</label>
+                        <select class="form-control select2" name="opd" required>
+                            <option selected = ""> Pilih </option>
+                            @foreach ($opd as $o)
+                                @if ($user->profil->opd_id ==  $o->id)
+                                    <option value = "{{ $o->id }}" selected>  {{ $o->nama }} </option>
+                                @else
+                                    <option value = "{{ $o->id }}">  {{ $o->nama }}  </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" name="status" required>
+                            @if ($user->status =='enable')
+                            <option value = "enable" selected> Enable </option>
+                            <option value = "disable"> Disable </option>
+                            @else
+                            <option value = "enable"> Enable </option>
+                            <option value = "disable" selected> Disable </option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="text-right">
+                        <input type="submit" value="Simpan Data" class="btn btn-success">
+                    </div>
                 </form>
             </div>
         </div>

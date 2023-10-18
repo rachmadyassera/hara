@@ -115,7 +115,32 @@
                     window.location.href = urlToRedirect;
                 } else {
                     Swal.fire('Wops, Hampir Saja !',
-                        'Perintah Hapus dibatalkan .',
+                        'Perintah hapus dibatalkan .',
+                        'success');
+                }
+            });
+    }
+
+
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href'); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
+        console.log(urlToRedirect); // verify if this is the right URL
+        Swal.fire({
+                title: 'Apakah anda yakin?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya !'
+            })
+            .then((result) => {
+                // redirect with javascript here as per your logic after showing the alert using the urlToRedirect value
+                if (result.isConfirmed) {
+                    window.location.href = urlToRedirect;
+                } else {
+                    Swal.fire('Wops, Hampir Saja !',
+                        'Konfirmasi dibatalkan.',
                         'success');
                 }
             });

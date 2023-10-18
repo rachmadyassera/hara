@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Opd extends Model
+class Profil extends Model
 {
     use HasFactory;
+    public $table = 'profil_users';
 
     protected $fillable = [
         'id',
-        'nama',
-        'alamat',
-        'longitude',
-        'latitude'
+        'user_id',
+        'opd_id',
+        'nip',
+        'jabatan',
+        'nohp',
     ];
 
-    protected $table = 'opd';
 
     public function getIncrementing(){
         return false;
@@ -27,9 +28,13 @@ class Opd extends Model
         return 'string';
     }
 
-    public function profil()
+    public function user()
     {
-        return $this->hasOne(Profil::class);
+        return $this->belongsTo(User::class);
     }
 
+    public function opd()
+    {
+        return $this->belongsTo(Opd::class);
+    }
 }
