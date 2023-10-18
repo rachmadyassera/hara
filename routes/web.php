@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OpdController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::resource('dashboard', DashboardController::class)->middleware('can:isAdmin');
+Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
 Route::get('/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
 Route::resource('category', CategoryController::class)->middleware('can:isAdmin');
 Route::resource('product', ProductController::class)->middleware('can:isAdmin');
@@ -34,6 +35,9 @@ Route::resource('catalog', CatalogController::class)->only('index');
 Route::resource('user', UserController::class)->middleware('can:isAdmin');
 Route::get('/user/destroy/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy')->middleware('can:isAdmin');
 Route::get('/user/reset-pass/{id}', 'App\Http\Controllers\UserController@reset_pass')->name('user.reset-pass')->middleware('can:isAdmin');
+
+Route::get('/profil', 'App\Http\Controllers\ProfilController@index')->name('profil.index')->middleware('can:isAdminOperator');
+Route::put('/profil/change-password', 'App\Http\Controllers\ProfilController@change_password')->name('profil.change-password')->middleware('can:isAdminOperator');
 
 Route::resource('opd', OpdController::class)->middleware('can:isAdmin');
 Route::get('/opd/disable/{id}', 'App\Http\Controllers\OpdController@disable')->middleware('can:isAdmin');

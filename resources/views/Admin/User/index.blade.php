@@ -44,7 +44,7 @@
                                     Instansi : {{$user->profil->opd->nama}}<br>
                                     No HP : {{$user->profil->nohp}}
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle; ">
                                     <ul class="nav">
                                         <a href="{{route ('user.edit', $user->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a>&nbsp;
                                         <a href="{{route ('user.destroy', $user->id)}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>&nbsp;

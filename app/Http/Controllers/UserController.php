@@ -8,6 +8,7 @@ use App\Models\Profil;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -24,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $datauser = User::with('opd')->latest()->whereNot('name','developer')->get();
+        $datauser = User::with('opd')->whereNot('name','developer')->latest()->get();
         return view('Admin.User.index', compact('datauser'));
     }
 
@@ -155,4 +156,5 @@ class UserController extends Controller
         return back();
 
     }
+
 }

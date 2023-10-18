@@ -46,7 +46,7 @@ class LoginController extends Controller
             $this->redirectTo = route('dashboard.index');
             return $this->redirectTo;
         }else{
-            $this->redirectTo = route('catalog.index');
+            $this->redirectTo = route('dashboard.index');
             return $this->redirectTo;
         }
     }
