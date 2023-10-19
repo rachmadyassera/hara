@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Opd;
+use App\Models\Location;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,6 +65,11 @@ class User extends Authenticatable
     public function opd()
     {
         return $this->belongsTo(Opd::class);
+    }
+
+    public function location()
+    {
+        return $this->hasMany(Location::class);
     }
 
 }

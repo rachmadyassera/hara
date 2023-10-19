@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -42,6 +43,8 @@ Route::put('/profil/change-password', 'App\Http\Controllers\ProfilController@cha
 Route::resource('opd', OpdController::class)->middleware('can:isAdmin');
 Route::get('/opd/disable/{id}', 'App\Http\Controllers\OpdController@disable')->middleware('can:isAdmin');
 
+Route::resource('location', LocationController::class)->middleware('can:isOperator');
+Route::get('/location/disable/{id}', 'App\Http\Controllers\LocationController@disable')->middleware('can:isAdminOperator');
 
 
 

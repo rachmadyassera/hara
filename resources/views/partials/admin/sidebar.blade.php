@@ -9,7 +9,7 @@
       <ul class="sidebar-menu">
         <li class="menu-header">Main Menu</li>
         <li class="dropdown">
-          <a href="{{ url('/dashboard') }}" class="nav-link "><i class="fas fa-fire"></i><span>Dashboard</span></a>
+          <a href="{{ url('/dashboard') }}" class="nav-link "><i class="fas fa-home"></i><span>Dashboard</span></a>
         </li>
         <li class="dropdown">
           <a href="{{ url('/opd') }}" class="nav-link "><i class="fas fa-university"></i><span>Opd</span></a>

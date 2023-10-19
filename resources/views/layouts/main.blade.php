@@ -26,7 +26,11 @@
 
     @include('sweetalert::alert')
     @include('partials.navbar')
-    @include('partials.sidebar')
+    @if (Auth::user()->role == 'admin')
+    @include('partials.admin.sidebar')
+    @else
+    @include('partials.operator.sidebar')
+    @endif
 
       <!-- Main Content -->
       <div class="main-content">
