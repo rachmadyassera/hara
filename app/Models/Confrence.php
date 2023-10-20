@@ -2,23 +2,27 @@
 
 namespace App\Models;
 
+use App\Models\Opd;
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Location extends Model
+class Confrence extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
         'user_id',
-        'nama',
-        'alamat',
+        'opd_id',
+        'location_id',
+        'judul',
+        'keterangan',
+        'tanggal',
         'status'
     ];
 
-    protected $table = 'locations';
 
     public function getIncrementing(){
         return false;
@@ -33,8 +37,13 @@ class Location extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function confrence()
+    public function opd()
     {
-        return $this->hasMany(Confrence::class);
+        return $this->belongsTo(Opd::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 }

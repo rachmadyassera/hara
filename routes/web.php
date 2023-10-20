@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ConfrencesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::get('/opd/disable/{id}', 'App\Http\Controllers\OpdController@disable')->m
 
 Route::resource('location', LocationController::class)->middleware('can:isOperator');
 Route::get('/location/disable/{id}', 'App\Http\Controllers\LocationController@disable')->middleware('can:isAdminOperator');
+
+Route::resource('confrence', ConfrencesController::class)->middleware('can:isOperator');
+Route::get('/confrence/disable/{id}', 'App\Http\Controllers\ConfrencesController@disable')->middleware('can:isOperator');
 
 
 

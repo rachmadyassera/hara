@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label>Organisasi</label>
                         <select class="form-control select2" name="opd" required>
-                            <option selected = ""> Pilih </option>
+                            <option value = ""> Pilih </option>
                             @foreach ($opd as $o)
                                 @if ($user->profil->opd_id ==  $o->id)
                                     <option value = "{{ $o->id }}" selected>  {{ $o->nama }} </option>

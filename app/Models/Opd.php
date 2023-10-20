@@ -32,4 +32,10 @@ class Opd extends Model
         return $this->hasOne(Profil::class);
     }
 
+    public function confrence()
+    {
+        return $this->hasMany(Confrence::class);
+    }
+
+
 }

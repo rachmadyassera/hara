@@ -15,7 +15,7 @@
             <a href="{{ url('/location') }}" class="nav-link "><i class="fas fa-map-marker-alt"></i><span>Lokasi</span></a>
         </li>
         <li class="dropdown">
-            <a href="{{ url('/conference') }}" class="nav-link "><i class="far fa-handshake"></i><span>Rapat</span></a>
+            <a href="{{ url('/confrence') }}" class="nav-link "><i class="far fa-handshake"></i><span>Rapat</span></a>
         </li>
     </ul>
 
