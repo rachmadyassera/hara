@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ConfrencesController;
+use App\Http\Controllers\ParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,10 @@ Route::get('/location/disable/{id}', 'App\Http\Controllers\LocationController@di
 
 Route::resource('confrence', ConfrencesController::class)->middleware('can:isOperator');
 Route::get('/confrence/disable/{id}', 'App\Http\Controllers\ConfrencesController@disable')->middleware('can:isOperator');
+Route::get('/confrence/disable-participant/{id}', 'App\Http\Controllers\ConfrencesController@disable_participant')->middleware('can:isOperator');
 
+Route::get('/presence/{id}', 'App\Http\Controllers\ParticipantController@presence')->name('presence.confrence');
+Route::post('participant/store', 'App\Http\Controllers\ParticipantController@store')->name('participant.store');
 
 
 

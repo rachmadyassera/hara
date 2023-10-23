@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Profil;
 use App\Models\Location;
 use App\Models\Confrence;
+use App\Models\Participant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +62,10 @@ class ConfrencesController extends Controller
     public function show(string $id)
     {
         //
+        $rapat = Confrence::find($id);
+        $peserta = Participant::with('confrence')->latest()->get()->where('status','enable')->where('confrence_id', $id);
+
+        return view('Operator.Rapat.peserta', compact('rapat','peserta'));
     }
 
     /**
@@ -117,6 +122,17 @@ class ConfrencesController extends Controller
         $rpt->save();
 
         Alert::success('Berhasil', 'Rapat berhasil dihapus');
+        return back();
+
+    }
+
+    public function disable_participant($id)
+    {
+        $rpt = Participant::find($id);
+        $rpt->status = 'disable';
+        $rpt->save();
+
+        Alert::success('Berhasil', 'Peserta berhasil dihapus');
         return back();
 
     }

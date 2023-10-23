@@ -36,7 +36,9 @@
                                 <td style="vertical-align: top;">
                                     <ul class="nav">
                                         <a href="{{route ('confrence.edit', $rpt->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="/confrence/disable/{{$rpt->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>
+                                        <a href="/confrence/disable/{{$rpt->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a> &nbsp;
+                                        <a href="{{route ('confrence.show', $rpt->id)}}" class="btn-sm btn-success"><i class="fa fa-address-book"></i></a>&nbsp;
+                                        <a href="/presence/{{$rpt->id}}" class="btn-sm btn-info" target="_blank"> <i class="fa fa-pen-nib"></i></a>
                                     </ul>
                                 </td>
                             </tr>
