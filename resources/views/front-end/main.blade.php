@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Monza &rsaquo; Sepatu Terbaik &mdash; Produk Lokal</title>
+  <title>Hara &rsaquo; Formulir Kehadiran &mdash; Dinas Komunikasi dan Informatika Kota Tanjungbalai</title>
+  <meta author="Rachmad Yasser Al Zuhri | 081279329132 | rachmad.yasser.a@gmail.com">
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,20 +17,34 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
 
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
+    <link rel="stylesheet" type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-
+       bootstrap/4.3.1/css/bootstrap.css">
 
-<body class="layout-3">
+    <script type="text/javascript"
+       src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link type="text/css"
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-
+     street/jquery-ui.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="http://keith-
+     wood.name/css/jquery.signature.css">
+
+
+    <style>
+        .kbw-signature { width: 100%; height: 200px;}
+        #sig canvas{
+            width: 100% !important;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body class="layout-2">
   <div id="app">
     <div class="main-wrapper container">
+    @include('sweetalert::alert')
       @include('front-end.navbar')
       <!-- Main Content -->
       <div class="main-content">
@@ -64,5 +79,23 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <script type="text/javascript"
+  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+</script>
+<script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" ></script>
+
+<script type="text/javascript">
+    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+    $('#clear').click(function(e) {
+        e.preventDefault();
+        sig.signature('clear');
+        $("#signature64").val('');
+    });
+</script>
 </body>
 </html>

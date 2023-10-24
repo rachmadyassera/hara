@@ -1,15 +1,7 @@
 @extends('front-end.main')
 @section('content')
 @inject('carbon', 'Carbon\Carbon')
-<link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
-<style>
-    .kbw-signature { width: 100%; height: 200px;}
-    #sig canvas{
-        width: 100% !important;
-        height: auto;
-    }
-</style>
+
 
 <section class="section">
     <div class="section-body">
@@ -62,14 +54,16 @@
                         <input type="text" name="nohp" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label class="" for="">Signature:</label>
-                        <br/>
-                            <div id="sig" ></div>
-                        <br/>
-                        <button id="clear" class="btn btn-danger btn-sm">Clear Signature</button>
-                        <textarea id="signature64" name="signed" style="display: none"></textarea>
+                        <label>Tandatangan anda :</label>
                     </div>
-
+                    <div class="form-group shadow">
+                        <div id="sig" ></div>
+                        <br/>
+                        <textarea id="signature64" name="signed" style="display:none">
+                        </textarea>
+                    </div>
+                    <button id="clear" class="btn btn-danger">Hapus
+                        Tandatangan</button>
                     <div class="text-right">
                         <input type="submit" value="Simpan Data" class="btn btn-success">
                     </div>
@@ -81,13 +75,4 @@
         </div>
     </div>
   </section>
-  <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
-  <script type="text/javascript">
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-</script>
 @endsection

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-primary">
+<nav class="navbar navbar-expand-lg bg-primary">
     <a class="navbar-brand" href="{{ url('/') }}">Hara</a>
     {{-- <div class="nav-collapse">
             <ul class="navbar-nav">
@@ -8,7 +8,7 @@
                 </a>
                 </li>
             </ul>
-        </div> --}}
+    </div> --}}
       <form class="form-inline ml-auto">
       </form>
 
