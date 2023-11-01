@@ -1,12 +1,23 @@
 @extends('layouts.main')
 @section('content')
 @inject('carbon', 'Carbon\Carbon')
-<div class="container">
+
+<div class="col-12 mb-4">
+    <div class="hero bg-info text-white shadow">
+      <div class="hero-inner">
+        <h2>{{ $rapat->judul }}</h2>
+        <p class="lead">{{ $carbon::parse($rapat->tanggal)->isoFormat('dddd, D MMMM Y') }} <br>{{ $rapat->location->nama }}</p>
+        <p class="lead"><h5>Jumlah Kehadiran : {{ $peserta->count() }} Peserta</h5></p>
+      </div>
+    </div>
+</div>
         <div class="card shadow">
             <div class="card-header">
-                <h4 class="card-title">Data peserta {{ $rapat->judul }}</h4>
+                <h4 class="card-title">Data kehadiran peserta </h4>
                 <div class="card-header-action">
-                    {{--  --}}
+                    <div class="buttons">
+                        <a href="{{route ('confrence.generatepdf', $rapat->id)}}"  class="btn btn-icon btn-success"><i class="fas fa-file-pdf"></i> Generate PDF</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -18,7 +29,6 @@
                                 <td>Nama </td>
                                 <td>Instansi </td>
                                 <td>No HP </td>
-                                <td style="width: 25%" class="text-center">Tandatangan </td>
                                 <td style="width: 120px">Action</td>
                             </tr>
                         </thead>
@@ -29,10 +39,6 @@
                                 <td style="vertical-align: middle; ">{{$pst->nama}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->instansi}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->nohp}}</td>
-                                <td style="vertical-align: middle;  ">
-                                    <center><img  style="width: 50%" src="{{ asset('upload/'.$pst->tandatangan) }}" alt=""></center>
-
-                                </td>
                                 <td style="vertical-align: middle;">
                                     <ul class="nav">
                                         <a href="/confrence/disable-participant/{{$pst->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>
@@ -46,6 +52,5 @@
                 </div>
             </div>
         </div>
-</div>
 
 @endsection

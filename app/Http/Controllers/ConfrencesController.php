@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Carbon\Carbon;
 use App\Models\Profil;
+// use Barryvdh\DomPDF\PDF as PDF;
+// use \PDF;
 use App\Models\Location;
+// use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Confrence;
 use App\Models\Participant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ConfrencesController extends Controller
 {
@@ -43,8 +48,9 @@ class ConfrencesController extends Controller
     public function store(Request $request)
     {
         //
+        $id = Str::uuid();
         Confrence::create([
-            'id' => Str::uuid(),
+            'id' => $id,
             'user_id' => Auth::user()->id,
             'opd_id' => Auth::user()->profil->opd_id,
             'location_id' => $request->location,
@@ -52,6 +58,8 @@ class ConfrencesController extends Controller
             'tanggal' => $request->tanggal,
             'keterangan' => $request->keterangan
         ]);
+
+        QrCode::generate(route ('presence.confrence', $id),  public_path('qrcodes/'.$id.'.svg'));
         Alert::success('Berhasil', 'Rapat berhasil didaftarkan');
         return redirect()->route('confrence.index');
     }
@@ -134,6 +142,26 @@ class ConfrencesController extends Controller
 
         Alert::success('Berhasil', 'Peserta berhasil dihapus');
         return back();
+    }
+
+    public function generate_pdf(string $id)
+    {
+        $rapat = Confrence::find($id);
+        $peserta = Participant::with('confrence')->latest()->get()->where('status','enable')->where('confrence_id', $id);
+        $title = 'Daftar Kehadiran '.$rapat->judul;
+        // dd($rapat,$peserta,$title);
+        $pdf = PDF::loadview('Operator.Pdf.peserta', compact('rapat','peserta','title'))->setPaper('legal', 'potrait');
+        return $pdf->download($title.'.pdf');
+    }
+
+    public function generate_pdf_qrcode(string $id)
+    {
+        $rapat = Confrence::find($id);
+        $title = 'Qr Code Formulir Kehadiran '.$rapat->judul;
+        // dd($rapat,$peserta,$title);
+        $pdf = PDF::loadview('Operator.Pdf.qrcode', compact('rapat','title'))->setPaper('legal', 'potrait');
+        return $pdf->download($title.'.pdf');
+        // return view('Operator.Pdf.qrcode', compact('rapat','title'));
 
     }
 }

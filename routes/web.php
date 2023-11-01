@@ -30,8 +30,6 @@ Route::get('/', function () {
 Auth::routes();
 Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
 Route::get('/user/json', [\App\Http\Controllers\UserController::class, 'json'])->name('user.json');
-Route::resource('category', CategoryController::class)->middleware('can:isAdmin');
-Route::resource('product', ProductController::class)->middleware('can:isAdmin');
 Route::resource('catalog', CatalogController::class)->only('index');
 
 
@@ -51,6 +49,8 @@ Route::get('/location/disable/{id}', 'App\Http\Controllers\LocationController@di
 Route::resource('confrence', ConfrencesController::class)->middleware('can:isOperator');
 Route::get('/confrence/disable/{id}', 'App\Http\Controllers\ConfrencesController@disable')->middleware('can:isOperator');
 Route::get('/confrence/disable-participant/{id}', 'App\Http\Controllers\ConfrencesController@disable_participant')->middleware('can:isOperator');
+Route::get('/generatepdf-participant/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf')->name('confrence.generatepdf');
+Route::get('/generatepdf-qrcode/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf_qrcode')->name('confrence.generatepdf-qrcode');
 
 Route::get('/presence/{id}', 'App\Http\Controllers\ParticipantController@presence')->name('presence.confrence');
 Route::post('participant/store', 'App\Http\Controllers\ParticipantController@store')->name('participant.store');

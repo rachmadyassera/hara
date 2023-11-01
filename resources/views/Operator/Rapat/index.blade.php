@@ -8,6 +8,7 @@
                 <div class="card-header-action">
                     <div class="buttons">
                         <a href="{{route ('confrence.create')}}"  class="btn btn-icon btn-info"><i class="fas fa-plus-circle"></i> Rapat baru</a>
+
                     </div>
                 </div>
             </div>
@@ -17,33 +18,37 @@
                     <table id="datatables" class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
+                                <td>No</td>
                                 <td>Judul</td>
                                 <td>Dilaksanakan </td>
                                 <td>Keterangan </td>
-                                <td>Qr Code </td>
-                                <td style="width: 120px">Action</td>
+                                <td style="width: 120px"></td>
                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach ($rapat as $rpt )
                             <tr>
+                                <td style="vertical-align: top; ">{{$loop->iteration}}</td>
                                 <td style="vertical-align: top; ">{{$rpt->judul}}</td>
                                 <td style="vertical-align: top; ">{{ $carbon::parse($rpt->tanggal)->isoFormat('dddd, D MMMM Y') }} , <br>
                                     Lokasi : <br> {{$rpt->location->nama}}, <br>
                                     {{$rpt->location->alamat}}
                                 </td>
                                 <td style="vertical-align: top; ">{{$rpt->keterangan}}</td>
-                                <td style="vertical-align: top; ">
-                                    {!! QrCode::size(100)->generate(route ('presence.confrence', $rpt->id)); !!}
-                                </td>
-                                <td style="vertical-align: top;">
-                                    <ul class="nav">
-                                        <a href="{{route ('confrence.edit', $rpt->id)}}" class="btn-sm btn-warning"><i class="fa fa-edit"></i></a> &nbsp;
-                                        <a href="/confrence/disable/{{$rpt->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a> &nbsp;
-                                        <a href="{{route ('confrence.show', $rpt->id)}}" class="btn-sm btn-success"><i class="fa fa-address-book"></i></a>&nbsp;
-                                        <a href="{{route ('presence.confrence', $rpt->id)}}" class="btn-sm btn-info" target="_blank"> <i class="fa fa-pen-nib"></i></a>
-                                    </ul>
+                                <td style="vertical-align: top;" class="text-center">
+                                        <div class="dropdown d-inline">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              Action
+                                            </button>
+                                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                <a class="dropdown-item has-icon" href="{{route ('confrence.edit', $rpt->id)}}"><i class="fa fa-edit"></i> Edit</a>
+                                                <a class="dropdown-item has-icon" href="{{route ('confrence.generatepdf-qrcode', $rpt->id)}}"><i class="fa fa-qrcode"></i>Qr Code</a>
+                                                <a class="dropdown-item has-icon" href="{{route ('confrence.show', $rpt->id)}}"><i class="fa fa-address-book"></i> Data Peserta</a>
+                                                <a class="dropdown-item has-icon" href="{{route ('presence.confrence', $rpt->id)}}" target="_blank"><i class="fa fa-pen-nib"></i>Form Kehadiran</a>
+                                                <a class="dropdown-item has-icon" href="/confrence/disable/{{$rpt->id}}" onclick="confirmation_destroy(event)"><i class="fa fa-trash"></i> Hapus</a>
+                                            </div>
+                                        </div>
                                 </td>
                             </tr>
 
@@ -53,6 +58,5 @@
                 </div>
             </div>
         </div>
-</div>
-
+    </div>
 @endsection

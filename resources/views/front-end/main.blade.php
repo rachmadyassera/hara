@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Hara &rsaquo; Formulir Kehadiran &mdash; Dinas Komunikasi dan Informatika Kota Tanjungbalai</title>
+  <title>Siakra &rsaquo; Sistem Informasi Absensi Kehadiran Rapat &mdash; Dinas Komunikasi dan Informatika Kota Tanjungbalai</title>
   <meta author="Rachmad Yasser Al Zuhri | 081279329132 | rachmad.yasser.a@gmail.com">
 
     <!-- General CSS Files -->
@@ -41,27 +41,12 @@
     </style>
 </head>
 
-<body class="layout-2">
+<body class="layout-3">
   <div id="app">
-    <div class="main-wrapper container">
     @include('sweetalert::alert')
-      @include('front-end.navbar')
+      {{-- @include('front-end.navbar') --}}
       <!-- Main Content -->
-      <div class="main-content">
         @yield('content')
-      </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; @php
-              echo date('Y')
-          @endphp
-          <div class="bullet"></div> Design By <a href="#">Rachmad Yasser Al Zuhri</a>
-        </div>
-        <div class="footer-right">
-
-        </div>
-      </footer>
-    </div>
   </div>
 
   <!-- General JS Scripts -->

@@ -2,17 +2,15 @@
 @section('content')
 @inject('carbon', 'Carbon\Carbon')
 
-<section class="section">
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="login-brand">
-            Siakra
-          </div>
 
-          <div class="card card-primary">
-            <div class="card-header"><h4>Pelaksanaan acara :</h4></div>
+<section class="section">
+    <div class="section-body">
+        <div class="card">
+            <div class="card-header">
+                <h4>Selamat datang peserta kegiatan {{ $rapat->judul }}</h4>
+            </div>
             <div class="card-body">
+                <p>Pelaksanaan acara :</p>
                 <table>
                     <tr>
                         <td>
@@ -30,13 +28,21 @@
                             {{ $rapat->location->nama }}
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            {{ $rapat->keterangan }}
+                        </td>
+                    </tr>
                 </table>
+                </div>
             </div>
-          </div>
-          <div class="card card-primary">
-            <div class="card-header"><h4>Formulir Pendaftaran Kehadiran</h4></div>
-
+        </div>
+        <div class="card">
+            <div class="card-header">
+            <h4>Formulir pendaftaran kehadiran peserta</h4>
+            </div>
             <div class="card-body">
+
                 <form action="{{route('participant.store')}}" method="POST">
                     @csrf
                     <input type="hidden" name="confrence" value="{{ $rapat->id }}" class="form-control" required>
@@ -68,12 +74,10 @@
                     </div>
                 </form>
             </div>
-          </div>
-          <div class="simple-footer">
-            Formulir kehadiran acara ini didaftarkan dan diselenggarakan oleh {{ $rapat->opd->nama }} Pemerintah Kota Tanjungbalai
-          </div>
+            <div class="card-footer bg-whitesmoke">
+                Penyelenggara daftar hadir kegiatan : <br>{{ $rapat->opd->nama }}
+            </div>
         </div>
-      </div>
     </div>
   </section>
 @endsection

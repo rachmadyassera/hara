@@ -63,8 +63,6 @@
   <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
   <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
   <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-
-
   <!-- Page Specific JS File -->
 
   <!-- Template JS File -->
@@ -76,6 +74,7 @@
             $('#datatables').DataTable();
         });
   </script>
+
   {{-- <script>
     $(function() { // ajax datatable serverside
         $('#datatables').DataTable({

@@ -1,3 +1,3 @@
 <title>
-    Hara &mdash; Aplikasi Tata Kelola Kehadiran Rapat
+    Siakra &mdash; Sistem Informasi Absensi Kehadiran Rapat
 </title>
