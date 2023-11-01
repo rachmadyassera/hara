@@ -49,6 +49,6 @@
 <h4><center>QR Code Formulir Kehadiran</center></h4>
 <br>
 <br>
-<center><img style="width: 100%"  src="{{ public_path('qrcodes/'. $rapat->id.'.svg') }}" alt=""></center>
+<center><img style="width: 80%"  src="{{ public_path('qrcodes/'. $rapat->id.'.svg') }}" alt=""></center>
 </body>
 </html>

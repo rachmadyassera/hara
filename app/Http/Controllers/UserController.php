@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $datauser = User::with('opd')->whereNot('name','developer')->latest()->get();
+        $datauser = User::with('opd')->whereNot('name','developer')->latest()->get()->whereNotIn('email','developer@siakra.go.id');
         return view('Admin.User.index', compact('datauser'));
     }
 

@@ -25,10 +25,10 @@ class ConfrencesController extends Controller
     public function index()
     {
         //
-        // dd(Auth::user()->profil->opd_id);
+        // dd(Auth::user()->role);
         $rapat = Confrence::with(['user','opd','location'])->latest()->get()->where('status','enable')->where('opd_id', Auth::user()->profil->opd_id);
-
         return view('Operator.Rapat.index', compact('rapat'));
+
     }
 
     /**
@@ -125,12 +125,31 @@ class ConfrencesController extends Controller
 
     public function disable($id)
     {
-        $rpt = Confrence::find($id);
-        $rpt->status = 'disable';
-        $rpt->save();
+        if (Auth::user()->role == 'admin') {
+            # code...
 
-        Alert::success('Berhasil', 'Rapat berhasil dihapus');
-        return back();
+            $rpt = Confrence::find($id);
+            if ($rpt->status == 'enable') {
+                # code...
+                $rpt->status = 'disable';
+            } else {
+                # code...
+                $rpt->status = 'enable';
+            }
+            $rpt->save();
+
+            Alert::success('Berhasil', 'Status lokasi telah diperbaharui');
+            return back();
+
+        } else {
+            # code...
+            $rpt = Confrence::find($id);
+            $rpt->status = 'disable';
+            $rpt->save();
+
+            Alert::success('Berhasil', 'Rapat berhasil dihapus');
+            return back();
+        }
 
     }
 
@@ -163,5 +182,16 @@ class ConfrencesController extends Controller
         return $pdf->download($title.'.pdf');
         // return view('Operator.Pdf.qrcode', compact('rapat','title'));
 
+    }
+
+
+    //================ function admin ======================== //
+
+    public function all_confrence()
+    {
+        //
+        $rapat = Confrence::with(['user','opd','location'])->latest()->get();
+
+        return view('Admin.Rapat.index', compact('rapat'));
     }
 }

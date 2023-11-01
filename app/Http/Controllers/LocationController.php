@@ -93,12 +93,41 @@ class LocationController extends Controller
 
     public function disable($id)
     {
-        $opd = Location::find($id);
-        $opd->status = 'disable';
-        $opd->save();
 
-        Alert::success('Berhasil', 'Lokasi berhasil dihapus');
-        return back();
+        if (Auth::user()->role == 'admin') {
+            # code...
 
+            $opd = Location::find($id);
+            if ($opd->status == 'enable') {
+                # code...
+                $opd->status = 'disable';
+            } else {
+                # code...
+                $opd->status = 'enable';
+            }
+            $opd->save();
+
+            Alert::success('Berhasil', 'Status lokasi telah diperbaharui');
+            return back();
+
+        } else {
+            # code...
+            $opd = Location::find($id);
+            $opd->status = 'disable';
+            $opd->save();
+
+            Alert::success('Berhasil', 'Lokasi berhasil dihapus');
+            return back();
+        }
+    }
+
+
+    //================ function admin ======================== //
+
+    public function all_location()
+    {
+        //
+        $lokasi = Location::latest()->get();
+        return view('Admin.Lokasi.index', compact('lokasi'));
     }
 }

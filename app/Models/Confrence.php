@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Opd;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\Participant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -45,5 +46,10 @@ class Confrence extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function participant()
+    {
+        return $this->hasMany(Participant::class);
     }
 }

@@ -25,6 +25,8 @@ class ParticipantController extends Controller
         // dd($datenow->toDateString(),$rapat->tanggal);
         if ($rapat->tanggal !== $datenow->toDateString()) {
             # code...
+            // dd($rapat->tanggal, $datenow->toDateString() );
+
             Alert::warning('Oops', 'Daftar hadir tidak ditemukan');
             return view('front-end.peserta.rapat-disable');
         }

@@ -17,9 +17,9 @@ class UsersSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id' => Str::uuid(),
-            'name' => 'Developer',
+            'name' => 'Rachmad Yasser Al Zuhri',
             'role' => 'admin',
-            'email' => 'developer@hara.go.id',
+            'email' => 'developer@siakra.go.id',
             'password' => bcrypt('081279329132')
         ]);
     }

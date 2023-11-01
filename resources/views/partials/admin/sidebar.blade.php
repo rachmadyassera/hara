@@ -12,16 +12,16 @@
           <a href="{{ url('/dashboard') }}" class="nav-link "><i class="fas fa-home"></i><span>Dashboard</span></a>
         </li>
         <li class="dropdown">
-          <a href="{{ url('/opd') }}" class="nav-link "><i class="fas fa-university"></i><span>Opd</span></a>
+          <a href="{{ url('/opd') }}" class="nav-link "><i class="fas fa-university"></i><span>Organisasi</span></a>
         </li>
         <li class="dropdown">
           <a href="{{ url('/user') }}" class="nav-link "><i class="fas fa-users"></i><span>Users</span></a>
         </li>
         <li class="dropdown">
-          <a href="{{ url('/user') }}" class="nav-link "><i class="far fa-handshake"></i><span>Rapat</span></a>
+          <a href="{{ url('/get-all-location') }}" class="nav-link "><i class="fas fa-map-marker-alt"></i><span>Lokasi</span></a>
         </li>
         <li class="dropdown">
-          <a href="{{ url('/user') }}" class="nav-link "><i class="fas fa-map-marker-alt"></i><span>Lokasi</span></a>
+          <a href="{{ url('/get-all-confrence') }}" class="nav-link "><i class="far fa-handshake"></i><span>Rapat</span></a>
         </li>
       </ul>
 

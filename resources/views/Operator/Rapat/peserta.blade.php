@@ -26,6 +26,7 @@
                     <table id="datatables" class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
+                                <td>No </td>
                                 <td>Nama </td>
                                 <td>Instansi </td>
                                 <td>No HP </td>
@@ -36,6 +37,7 @@
 
                             @foreach ($peserta as $pst )
                             <tr>
+                                <td style="vertical-align: middle; ">{{$loop->iteration}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->nama}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->instansi}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->nohp}}</td>
