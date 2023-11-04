@@ -15,7 +15,7 @@ class ProfilController extends Controller
         $iduser = Auth::user()->id;
         $datauser = User::find($iduser);
 
-        return view('profil.index', compact('datauser','title_frm'));
+        return view('Profil.index', compact('datauser','title_frm'));
     }
 
     public function change_password(Request $request)

@@ -23,7 +23,7 @@
 
 <!-- /END GA --></head>
 
-<body class="layout-3">
+<body class="layout-2">
   <div id="app">
     <div class="main-wrapper container">
 

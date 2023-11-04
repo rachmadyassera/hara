@@ -10,7 +10,7 @@
             Siakra
           </div>
 
-          <div class="card card-primary">
+          <div class="card card-primary shadow">
             <div class="card-header"><h4>Pelaksanaan acara :</h4></div>
             <div class="card-body">
                 <table>
@@ -33,7 +33,7 @@
                 </table>
             </div>
           </div>
-          <div class="card card-primary">
+          <div class="card card-primary shadow">
             <div class="card-header"><h4>Formulir Pendaftaran Kehadiran</h4></div>
 
             <div class="card-body">
