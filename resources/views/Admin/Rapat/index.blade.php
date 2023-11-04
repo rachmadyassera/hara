@@ -7,8 +7,7 @@
                 <h4 class="card-title">Data seluruh rapat </h4>
                 <div class="card-header-action">
                     <div class="buttons">
-                        <a href="{{route ('confrence.create')}}"  class="btn btn-icon btn-info"><i class="fas fa-plus-circle"></i> Rapat baru</a>
-
+                        <a href="{{route ('confrence.generatepdf-all-confrence')}}"  class="btn btn-icon btn-success"><i class="fas fa-file-pdf"></i> Generate PDF</a>
                     </div>
                 </div>
             </div>
@@ -22,6 +21,7 @@
                                 <td style="width: 130px">Judul</td>
                                 <td style="width: 170px">Dilaksanakan </td>
                                 <td>Keterangan </td>
+                                <td>Status </td>
                                 <td>Jumlah Hadir </td>
                                 <td ></td>
                             </tr>
@@ -37,6 +37,13 @@
                                     {{$rpt->location->alamat}}
                                 </td>
                                 <td style="vertical-align: top; ">{{$rpt->keterangan}}</td>
+                                <td style="vertical-align: top; ">
+                                    @if ($rpt->status =='enable')
+                                    <div class="badge badge-success">Enable</div>
+                                    @else
+                                    <div class="badge badge-danger">Disable</div>
+                                    @endif
+                                </td>
                                 <td style="vertical-align: top; ">{{$rpt->participant->where('status','enable')->count()}}</td>
                                 <td style="vertical-align: top;" class="text-center">
                                         <div class="dropdown d-inline">
@@ -46,7 +53,7 @@
                                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 29px, 0px); top: 0px; left: 0px; will-change: transform;">
                                                 <a class="dropdown-item has-icon" href="{{route ('confrence.show', $rpt->id)}}"><i class="fa fa-address-book"></i> Data Peserta</a>
                                                 <a class="dropdown-item has-icon" href="{{route ('presence.confrence', $rpt->id)}}" target="_blank"><i class="fa fa-pen-nib"></i>Form Kehadiran</a>
-                                                <a class="dropdown-item has-icon" href="/confrence/disable/{{$rpt->id}}" onclick="confirmation_destroy(event)"><i class="fa fa-trash"></i> Hapus</a>
+                                                <a class="dropdown-item has-icon" href="/confrence/disable/{{$rpt->id}}" onclick="confirmation(event)"><i class="fa fa-recycle"></i> Reset</a>
                                             </div>
                                         </div>
                                 </td>

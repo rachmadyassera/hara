@@ -48,11 +48,12 @@ Route::get('/location/disable/{id}', 'App\Http\Controllers\LocationController@di
 Route::get('/get-all-location', 'App\Http\Controllers\LocationController@all_location')->name('location.get-all')->middleware('can:isAdmin');
 
 Route::resource('confrence', ConfrencesController::class)->middleware('can:isAdminOperator');
-Route::get('/confrence/disable/{id}', 'App\Http\Controllers\ConfrencesController@disable')->middleware('can:isOperator');
+Route::get('/confrence/disable/{id}', 'App\Http\Controllers\ConfrencesController@disable')->middleware('can:isAdminOperator');
 Route::get('/confrence/disable-participant/{id}', 'App\Http\Controllers\ConfrencesController@disable_participant')->middleware('can:isAdminOperator');
 Route::get('/generatepdf-participant/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf')->name('confrence.generatepdf');
 Route::get('/generatepdf-qrcode/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf_qrcode')->name('confrence.generatepdf-qrcode');
 Route::get('/get-all-confrence', 'App\Http\Controllers\ConfrencesController@all_confrence')->name('confrence.get-all')->middleware('can:isAdmin');
+Route::get('/generate_all_confrence_pdf', 'App\Http\Controllers\ConfrencesController@generate_all_confrence_pdf')->name('confrence.generatepdf-all-confrence')->middleware('can:isAdmin');
 
 Route::get('/presence/{id}', 'App\Http\Controllers\ParticipantController@presence')->name('presence.confrence');
 Route::post('participant/store', 'App\Http\Controllers\ParticipantController@store')->name('participant.store');

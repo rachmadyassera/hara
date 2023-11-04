@@ -194,4 +194,14 @@ class ConfrencesController extends Controller
 
         return view('Admin.Rapat.index', compact('rapat'));
     }
+
+
+    public function generate_all_confrence_pdf()
+    {
+        $rapat = Confrence::with(['user','opd','location'])->latest()->get()->where('status','enable');
+        $title = 'Data Seluruh Rapat - Siakra';
+        // dd($rapat,$peserta,$title);
+        $pdf = PDF::loadview('Operator.Pdf.rapat', compact('rapat','title'))->setPaper('legal', 'potrait');
+        return $pdf->download($title.'.pdf');
+    }
 }

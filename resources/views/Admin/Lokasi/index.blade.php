@@ -4,11 +4,6 @@
         <div class="card shadow">
             <div class="card-header">
                 <h4 class="card-title">Data seluruh lokasi</h4>
-                <div class="card-header-action">
-                    <div class="buttons">
-                        <a href="{{route ('location.create')}}"  class="btn btn-icon btn-info"><i class="fas fa-plus-circle"></i> Lokasi baru</a>
-                    </div>
-                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
