@@ -1,7 +1,10 @@
 @extends('layouts.app')
+{{-- @extends('front-end.main') --}}
 
 @section('content')
-<div class="container">
+<section class="section">
+
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow">
@@ -59,4 +62,6 @@
         </div>
     </div>
 </div>
+</section>
+
 @endsection

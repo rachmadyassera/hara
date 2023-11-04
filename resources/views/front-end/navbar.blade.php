@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg main-navbar bg-primary">
     <a class="navbar-brand" href="{{ url('/') }}">SIAKRA</a>
     {{-- <div class="nav-collapse">
             <ul class="navbar-nav">

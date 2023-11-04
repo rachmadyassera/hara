@@ -23,9 +23,9 @@
 
 <!-- /END GA --></head>
 
-<body class="layout-2">
+<body class="layout-3">
   <div id="app">
-    <div class="main-wrapper container">
+    <div class="main-wrapper">
 
       @include('front-end.navbar')
       <!-- Main Content -->

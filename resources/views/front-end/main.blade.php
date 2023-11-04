@@ -45,6 +45,7 @@
   <div id="app">
     @include('sweetalert::alert')
       {{-- @include('front-end.navbar') --}}
+
       <!-- Main Content -->
         @yield('content')
   </div>
