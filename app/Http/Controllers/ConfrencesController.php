@@ -169,6 +169,8 @@ class ConfrencesController extends Controller
         $peserta = Participant::with('confrence')->latest()->get()->where('status','enable')->where('confrence_id', $id);
         $title = 'Daftar Kehadiran '.$rapat->judul;
         // dd($rapat,$peserta,$title);
+        // return view('Operator.Pdf.peserta', compact('rapat','peserta','title'));
+
         $pdf = PDF::loadview('Operator.Pdf.peserta', compact('rapat','peserta','title'))->setPaper('legal', 'potrait');
         return $pdf->download($title.'.pdf');
     }
