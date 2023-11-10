@@ -6,12 +6,16 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>Siakra &rsaquo; Sistem Informasi Absensi Kehadiran Rapat &mdash; Dinas Komunikasi dan Informatika Kota Tanjungbalai</title>
   <meta author="Rachmad Yasser Al Zuhri | 081279329132 | rachmad.yasser.a@gmail.com">
+  <meta name="description" content="Siakra - Sistem Informasi Absensi Kehadiran Rapat dikelola oleh Bidang APTIKA, Dinas Komunikasi dan Informatika Kota Tanjungbalai" />
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-  <!-- CSS Libraries -->
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -59,6 +63,8 @@
   <script src="../assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+  <script src="{{ asset('assets/js/datatables.min.js') }}"></script>
+  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
 
   <!-- Page Specific JS File -->
 
@@ -74,7 +80,16 @@
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" ></script>
-
+<script>
+    $(document).ready(function () { // datatable clintside
+          $('#datatables').DataTable({
+            "dom": 'rtip',
+            searching: false,
+            "paging":   false,
+            "info":     false
+          });
+      });
+</script>
 <script type="text/javascript">
     var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
     $('#clear').click(function(e) {

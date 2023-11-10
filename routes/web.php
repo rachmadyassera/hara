@@ -23,9 +23,12 @@ use App\Http\Controllers\ParticipantController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth/login');
 });
+
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home.index');
+
 
 Auth::routes();
 Route::resource('dashboard', DashboardController::class)->middleware('can:isAdminOperator');
@@ -53,6 +56,7 @@ Route::get('/confrence/disable-participant/{id}', 'App\Http\Controllers\Confrenc
 Route::get('/generatepdf-participant/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf')->name('confrence.generatepdf');
 Route::get('/generatepdf-qrcode/{id}', 'App\Http\Controllers\ConfrencesController@generate_pdf_qrcode')->name('confrence.generatepdf-qrcode');
 Route::get('/get-all-confrence', 'App\Http\Controllers\ConfrencesController@all_confrence')->name('confrence.get-all')->middleware('can:isAdmin');
+Route::get('/all-participant-confrence/{id}', 'App\Http\Controllers\ConfrencesController@all_participant_confrence')->name('confrence.all-participant-confrence')->middleware('can:isAdmin');
 Route::get('/generate_all_confrence_pdf', 'App\Http\Controllers\ConfrencesController@generate_all_confrence_pdf')->name('confrence.generatepdf-all-confrence')->middleware('can:isAdmin');
 
 Route::get('/presence/{id}', 'App\Http\Controllers\ParticipantController@presence')->name('presence.confrence');

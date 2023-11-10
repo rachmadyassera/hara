@@ -204,4 +204,13 @@ class ConfrencesController extends Controller
         $pdf = PDF::loadview('Operator.Pdf.rapat', compact('rapat','title'))->setPaper('legal', 'potrait');
         return $pdf->download($title.'.pdf');
     }
+
+    public function all_participant_confrence(string $id)
+    {
+        //
+        $rapat = Confrence::find($id);
+        $peserta = Participant::with('confrence')->latest()->get()->where('confrence_id', $id);
+
+        return view('Admin.Rapat.peserta', compact('rapat','peserta'));
+    }
 }

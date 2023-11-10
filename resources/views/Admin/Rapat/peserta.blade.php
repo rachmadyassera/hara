@@ -7,7 +7,7 @@
       <div class="hero-inner">
         <h2>{{ $rapat->judul }}</h2>
         <p class="lead">{{ $carbon::parse($rapat->tanggal)->isoFormat('dddd, D MMMM Y') }} <br>{{ $rapat->location->nama }}</p>
-        <p class="lead"><h5>Jumlah Kehadiran : {{ $peserta->count() }} Peserta</h5></p>
+        <p class="lead"><h5>Jumlah Kehadiran : {{ $peserta->where('status','enable')->count() }} Peserta </h5>(Status : Enable)</p>
       </div>
     </div>
 </div>
@@ -26,10 +26,12 @@
                     <table id="datatables" class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr>
-                                <td style="width: 20px">No </td>
-                                <td style="width: 200px">Nama </td>
-                                <td >Instansi </td>
+                                <td>No </td>
+                                <td style="width: 180px">Nama </td>
+                                <td style="width: 180px">Instansi </td>
                                 <td>No HP </td>
+                                <td>Status </td>
+                                <td>Diperbaharui </td>
                                 <td style="width: 50px">Action</td>
                             </tr>
                         </thead>
@@ -41,8 +43,19 @@
                                 <td style="vertical-align: middle; ">{{$pst->nama}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->instansi}}</td>
                                 <td style="vertical-align: middle; ">{{$pst->nohp}}</td>
+                                <td style="vertical-align: middle; ">
+                                    @if ($pst->status =='enable')
+                                    <div class="badge badge-success">Enable</div>
+                                    @else
+                                    <div class="badge badge-danger">Disable</div>
+                                    @endif
+                                </td>
+                                <td style="vertical-align: middle; ">{{$pst->updated_at}}</td>
                                 <td style="vertical-align: middle;"  class="text-center">
-                                        <a href="/confrence/disable-participant/{{$pst->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>
+                                    @if ($pst->status =='enable')
+                                    <a href="/confrence/disable-participant/{{$pst->id}}" class="btn-sm btn-danger" onclick="confirmation_destroy(event)"> <i class="fa fa-trash"></i> </a>
+                                    @else
+                                    @endif
                                 </td>
                             </tr>
 

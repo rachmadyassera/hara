@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Confrence;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $datenow =Carbon::now();
+        $rapat = Confrence::with(['user','opd','location'])->whereDate('tanggal',$datenow)->latest()->get()->where('status','enable');
+        // return view('home');
+        // dd($rapat);
+        return view('front-end.home', compact('rapat'));
+
     }
 }
